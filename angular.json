@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "projects": {
+    "core-login": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/core-login",
+      "sourceRoot": "apps/core-login/src",
+      "prefix": "authLogin",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/core-login",
+            "index": "apps/core-login/src/index.html",
+            "main": "apps/core-login/src/main.ts",
+            "polyfills": "apps/core-login/src/polyfills.ts",
+            "tsConfig": "apps/core-login/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/core-login/src/favicon.ico",
+              "apps/core-login/src/assets"
+            ],
+            "styles": ["apps/core-login/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/core-login/src/environments/environment.ts",
+                  "with": "apps/core-login/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "core-login:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "core-login:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "core-login:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/core-login/tsconfig.app.json",
+              "apps/core-login/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/core-login/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/core-login/jest.config.js",
+            "tsConfig": "apps/core-login/tsconfig.spec.json",
+            "setupFile": "apps/core-login/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "core-login-e2e": {
+      "root": "apps/core-login-e2e",
+      "sourceRoot": "apps/core-login-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/core-login-e2e/cypress.json",
+            "tsConfig": "apps/core-login-e2e/tsconfig.e2e.json",
+            "devServerTarget": "core-login:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "core-login:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/core-login-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/core-login-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "core-login"
+}
