@@ -123,6 +123,37 @@
           }
         }
       }
+    },
+    "login-box": {
+      "projectType": "library",
+      "root": "libs/login-box",
+      "sourceRoot": "libs/login-box/src",
+      "prefix": "authLogin",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/login-box/tsconfig.lib.json",
+              "libs/login-box/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/login-box/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/login-box/jest.config.js",
+            "tsConfig": "libs/login-box/tsconfig.spec.json",
+            "setupFile": "libs/login-box/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
