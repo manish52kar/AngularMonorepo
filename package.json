@@ -25,11 +25,11 @@
     "update:check": "ng update",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "build-js": "ng build core-login --prod --output-hashing none && node apps/core-login/build/build.js"
   },
   "private": true,
   "dependencies": {
-    "@nrwl/angular": "8.6.0",
     "@angular/animations": "^8.2.0",
     "@angular/common": "^8.2.0",
     "@angular/compiler": "^8.2.0",
@@ -38,6 +38,8 @@
     "@angular/platform-browser": "^8.2.0",
     "@angular/platform-browser-dynamic": "^8.2.0",
     "@angular/router": "^8.2.0",
+    "@nrwl/angular": "8.6.0",
+    "concat": "^1.0.3",
     "core-js": "^2.5.4",
     "rxjs": "~6.4.0",
     "zone.js": "^0.9.1"

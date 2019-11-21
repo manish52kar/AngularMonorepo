@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<div id="demo"></div>
+<authLogin-root></authLogin-root>
+</body>
+</html> 
+
+<script>
+    function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                blob = allText;
+            }
+        }
+    }
+    rawFile.send(null);
+}
+//chrome.exe --allow-file-access-from-files --allow-file-access
+readTextFile('app.bundle.js');
+var init = eval(blob);
+init();
+</script>
